@@ -27,7 +27,12 @@ class WeatherApiClient {
     // i.e: https://www.metaweather.com/api/location/search/?query=london
     // [{"title":"London","location_type":"City","woeid":44418,"latt_long":"51.506321,-0.12714"}]
     // get woeid
-    final locationJson = jsonDecode(locationResponse.data) as List;
+    
+    // print(jsonDecode(locationResponse.data));
+    // print(locationResponse.data.toString());
+    // no need to jsonDecode(locaionResponse.data);
+    final locationJson = locationResponse.data;
+    
     return (locationJson.first['woeid']);
   }
 
@@ -39,7 +44,7 @@ class WeatherApiClient {
     if (weatherResponse.statusCode != 200) {
       throw Exception('error getting weather for location');
     }
-    final weatherJson = jsonDecode(weatherResponse.data);
+    final weatherJson = weatherResponse.data;
     return Weather.fromJson(weatherJson);
   }
 }
